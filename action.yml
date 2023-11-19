@@ -21,7 +21,7 @@ inputs:
     required: false
     default: false
   token:
-    description: 'Token to control releases. Use ${{ secrets.GITHUB_TOKEN }}'
+    description: 'Token to control releases. Refer https://github.com/actions/toolkit/tree/master/packages/github#usage'
     required: true
 runs:
   using: 'node12'
