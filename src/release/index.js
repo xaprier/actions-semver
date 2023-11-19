@@ -4,7 +4,9 @@ const { GitHub, context } = require('@actions/github');
 async function release(tagName) {
   try {
     // Get authenticated GitHub client (Ocktokit): https://github.com/actions/toolkit/tree/master/packages/github#usage
-    const github = new GitHub(process.env.GITHUB_TOKEN);
+    const myToken = core.getInput('token', { required: true });
+
+    const github = GitHub.getOctokit(myToken);
 
     // Get owner and repo from context of payload that triggered the action
     const { owner: currentOwner, repo: currentRepo } = context.repo;

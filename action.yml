@@ -20,6 +20,9 @@ inputs:
     description: '`true` to SEMVER tag version include v letter begin of tag. Default: `false`'
     required: false
     default: false
+  token:
+    description: 'Token to control releases. Use ${{ secrets.GITHUB_TOKEN }}'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
