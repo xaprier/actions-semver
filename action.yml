@@ -1,0 +1,25 @@
+name: 'Create a SEMVER tag and release'
+description: 'Create a release for a tag in your repository'
+author: 'xaprier'
+inputs:
+  draft:
+    description: '`true` to create a draft (unpublished) release, `false` to create a published one. Default: `false`'
+    required: false
+    default: false
+  prerelease:
+    description: '`true` to identify the release as a prerelease. `false` to identify the release as a full release. Default: `false`'
+    required: false
+    default: false
+  owner:
+    description: 'Owner of the repository if it is not the current one'
+    required: false
+  repo:
+    description: 'Repository on which to release.  Used only if you want to create the release on another repo'
+    required: false
+  include-letter-v:
+    description: '`true` to SEMVER tag version include v letter begin of tag. Default: `false`'
+    required: false
+    default: false
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

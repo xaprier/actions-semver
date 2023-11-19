@@ -2,7 +2,7 @@
   "name": "actions-semver",
   "version": "1.0.0",
   "description": "An action for creating tags and releases on commits according to commit messages with GitHub Actions",
-  "main": "index.js",
+  "main": "src/main.js",
   "scripts": {
     "lint": "eslint \"src/**.js\" --fix",
     "test": "eslint \"src/**.js\"",
