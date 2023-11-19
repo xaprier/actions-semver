@@ -28475,7 +28475,7 @@ function wrappy (fn, cb) {
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const core = __nccwpck_require__(2810);
-const GitHub = __nccwpck_require__(4176);
+const { GitHub, context } = __nccwpck_require__(4176);
 
 async function release(tagName) {
   try {

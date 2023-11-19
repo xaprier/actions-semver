@@ -1,5 +1,5 @@
 const core = require("@actions/core");
-const GitHub = require("@actions/github");
+const { GitHub, context } = require('@actions/github');
 
 async function release(tagName) {
   try {
