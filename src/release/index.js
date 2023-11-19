@@ -8,6 +8,8 @@ async function release(tagName) {
 
     const github = GitHub.getOctokit(myToken);
 
+    const context = github.context;
+
     // Get owner and repo from context of payload that triggered the action
     const { owner: currentOwner, repo: currentRepo } = context.repo;
 
