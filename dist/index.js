@@ -31902,10 +31902,6 @@ async function release(tagName) {
     // Get owner and repo from context of payload that triggered the action
     const { owner: currentOwner, repo: currentRepo } = context.repo;
 
-    const commitish = core.getInput('commitish', { required: false }) || context.sha;
-    const owner = core.getInput('owner', { required: false }) || currentOwner;
-    const repo = core.getInput('repo', { required: false }) || currentRepo;
-
     // get the latest release's sha value
     const { data: releases } = await github.repos.listReleases({
       owner,
