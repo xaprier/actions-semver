@@ -31888,19 +31888,21 @@ function wrappy (fn, cb) {
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const core = __nccwpck_require__(2810);
-const GitHub = __nccwpck_require__(4176);
+const { execSync } = __nccwpck_require__(2081);
+const { GitHub, context } = __nccwpck_require__(4176);
 
 async function release(tagName) {
   try {
     // Get authenticated GitHub client (Ocktokit): https://github.com/actions/toolkit/tree/master/packages/github#usage
-    const myToken = core.getInput('token', { required: true });
-
-    const github = GitHub.getOctokit(myToken);
-
-    const context = github.context;
+    const github = new GitHub(process.env.GITHUB_TOKEN);
 
     // Get owner and repo from context of payload that triggered the action
     const { owner: currentOwner, repo: currentRepo } = context.repo;
+
+    const commitish = core.getInput('commitish', { required: false }) || context.sha;
+
+    const owner = core.getInput('owner', { required: false }) || currentOwner;
+    const repo = core.getInput('repo', { required: false }) || currentRepo;
 
     // get the latest release's sha value
     const { data: releases } = await github.repos.listReleases({
