@@ -41,7 +41,7 @@ async function tag(lastCommitComment) {
   var targetTag = `${Math.floor(targetVersion / 1000000)}.${Math.floor(targetVersion / 1000) %
     1000}.${targetVersion % 1000}`;
 
-  if (include_v) 
+  if (include_v && (include_v === true || include_v === 'true')) 
     targetTag = `v${targetTag}`;
 
   await exec(`git tag ${targetTag}`);
