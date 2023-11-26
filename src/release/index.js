@@ -18,7 +18,7 @@ async function release(tagName) {
     const repo = core.getInput('repo', { required: false }) || currentRepo;
 
     // get the latest release's sha value
-    const { data: releases } = await octokit.repos.listReleases({
+    const { data: releases } = await octokit.rest.repos.listReleases({
       owner,
       repo
     });
@@ -30,7 +30,7 @@ async function release(tagName) {
       const headCommitSha = execSync('git rev-parse HEAD').toString().trim();
 
       // Compare latest release SHA with the current commitish to fetch commits
-      const { data: commits } = await octokit.repos.compareCommits({
+      const { data: commits } = await octokit.rest.repos.compareCommits({
         owner,
         repo,
         base: latestReleaseSha,
@@ -46,7 +46,7 @@ async function release(tagName) {
           const date = commit.commit.author.date;
 
           // Get tags associated with the commit
-          const { data: tags } = await octokit.repos.listTags({
+          const { data: tags } = await octokit.rest.repos.listTags({
             owner,
             repo,
           });
@@ -81,7 +81,7 @@ async function release(tagName) {
         })
         .join('\n');
 
-      const createReleaseResponse = await octokit.repos.createRelease({
+      const createReleaseResponse = await octokit.rest.repos.createRelease({
         owner,
         repo,
         tag_name: tagName,
@@ -105,7 +105,7 @@ async function release(tagName) {
       const initialCommitSha = execSync('git rev-list --max-parents=0 HEAD').toString().trim();
 
       // Compare latest release SHA with the current commitish to fetch commits
-      const { data: commits } = await octokit.repos.compareCommits({
+      const { data: commits } = await octokit.rest.repos.compareCommits({
         owner,
         repo,
         base: initialCommitSha,
@@ -121,7 +121,7 @@ async function release(tagName) {
           const date = commit.commit.author.date;
 
           // Get tags associated with the commit
-          const { data: tags } = await octokit.repos.listTags({
+          const { data: tags } = await octokit.rest.repos.listTags({
             owner,
             repo,
           });
@@ -156,7 +156,7 @@ async function release(tagName) {
         })
         .join('\n');
 
-      const createReleaseResponse = await octokit.repos.createRelease({
+      const createReleaseResponse = await octokit.rest.repos.createRelease({
         owner,
         repo,
         tag_name: tagName,
