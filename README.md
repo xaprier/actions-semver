@@ -40,6 +40,13 @@ jobs:
 
 This example YAML file demonstrates the basic usage of actions-semver. This action only tracks pushes to the main branch and creates a version. You can customize the parameters in the .yml file to fit the needs of your project.
 
+The GitHub Actions script is designed to automatically create Git tags for every commit on the main branch. The semantic version tags are generated based on commit messages:
+- If the commit message includes <b><i>minor</i></b> keyword, it means that the action should increment the semantic version by the Minor value. In semantic versioning (SemVer), versions are typically represented as MAJOR.MINOR.PATCH, where the MINOR version is bumped for backward-compatible new features. So, if a commit message contains the "minor" keyword, the action will increase the MINOR version of the semantic version.
+
+- If the commit message includes <b><i>major</i></b> keyword, it indicates that the action should increment the semantic version by the Major value. In SemVer, the MAJOR version is bumped for incompatible API changes. If a commit message includes the "major" keyword, the action will increase the MAJOR version of the semantic version.
+
+- If the commit message includes <b><i>release</i></b> keyword, the action will create a GitHub release. Additionally, it will read all the commits that occurred since the latest release. This information is then used to compose the release body, which is a description of the changes included in the release. The release body typically includes details such as the commit version, commit hash, commit owner, and commit date for each commit since the last release. This provides a summary of the changes made in the new release. 
+
 ## Release Body
 When creating release using this project, you can fork and change release body for yourself. Default release body as
 
