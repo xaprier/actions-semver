@@ -29285,12 +29285,19 @@ async function release(tagName) {
         target_commitish: commitish
       });
 
+      const {
+        data: { id: releaseId, html_url: htmlUrl, upload_url: uploadUrl }
+      } = createReleaseResponse;
+
       if (createReleaseResponse.status !== 201) {
         core.setFailed(
           `Failed to create the release: ${createReleaseResponse.status} ${createReleaseResponse.statusText}`
         );
       } else {
-        core.setOutput('release success', 'true');
+        core.setOutput('id', releaseId);
+        core.setOutput('html_url', htmlUrl);
+        core.setOutput('upload_url', uploadUrl);
+        core.setOutput('release_created', true);
       }
     } else {
       // no release, create one
@@ -29372,6 +29379,7 @@ async function release(tagName) {
         core.setOutput('id', releaseId);
         core.setOutput('html_url', htmlUrl);
         core.setOutput('upload_url', uploadUrl);
+        core.setOutput('release_created', true);
       }
       console.error('No release found, creating one');
     }
@@ -31359,8 +31367,6 @@ async function run() {
     await release(await tag(lastCommitComment));
   else
     await tag(lastCommitComment);
-
-  core.setOutput('release_created', createRelease);
 }
 
 // call async func
