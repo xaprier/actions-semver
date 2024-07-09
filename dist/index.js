@@ -31346,6 +31346,7 @@ var __webpack_exports__ = {};
 (() => {
 const release = __nccwpck_require__(3814);
 const tag = __nccwpck_require__(6250);
+const core = __nccwpck_require__(6398);
 const util = __nccwpck_require__(3837);
 const child_process = __nccwpck_require__(2081);
 
@@ -31358,6 +31359,8 @@ async function run() {
     await release(await tag(lastCommitComment));
   else
     await tag(lastCommitComment);
+
+  core.setOutput('release_created', createRelease);
 }
 
 // call async func

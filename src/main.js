@@ -1,5 +1,6 @@
 const release = require('./release');
 const tag = require('./tag');
+const core = require("@actions/core");
 const util = require('util');
 const child_process = require('child_process');
 
@@ -12,6 +13,8 @@ async function run() {
     await release(await tag(lastCommitComment));
   else
     await tag(lastCommitComment);
+
+  core.setOutput('release_created', createRelease);
 }
 
 // call async func
