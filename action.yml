@@ -14,7 +14,7 @@ inputs:
     description: 'Owner of the repository if it is not the current one'
     required: false
   repo:
-    description: 'Repository on which to release.  Used only if you want to create the release on another repo'
+    description: 'Repository on which to release. Used only if you want to create the release on another repo'
     required: false
   include-letter-v:
     description: '`true` to SEMVER tag version include v letter begin of tag. Default: `false`'
