@@ -29286,12 +29286,19 @@ async function release(tagName) {
       });
 
       const {
-        data: { id: releaseId, html_url: htmlUrl, upload_url: uploadUrl }
+        data: { status: status, statusText: statusText, id: releaseId, html_url: htmlUrl, upload_url: uploadUrl, tag_name: tag }
       } = createReleaseResponse;
 
-      if (createReleaseResponse.status !== 201) {
+      console.log("Tag: ", tag);
+      console.log("Status: ", status);
+      console.log("Status Text: ", statusText);
+      console.log("Release ID: ", releaseId);
+      console.log("HTML URL: ", htmlUrl);
+      console.log("Upload URL: ", uploadUrl);
+
+      if (status !== 201) {
         core.setFailed(
-          `Failed to create the release: ${createReleaseResponse.status} ${createReleaseResponse.statusText}`
+          `Failed to create the release: ${status} ${statusText}`
         );
       } else {
         core.setOutput('id', releaseId);
@@ -29368,12 +29375,19 @@ async function release(tagName) {
       });
 
       const {
-        data: { id: releaseId, html_url: htmlUrl, upload_url: uploadUrl }
+        data: { status: status, statusText: statusText, id: releaseId, html_url: htmlUrl, upload_url: uploadUrl, tag_name: tag }
       } = createReleaseResponse;
 
-      if (createReleaseResponse.status !== 201) {
+      console.log("Tag: ", tag);
+      console.log("Status: ", status);
+      console.log("Status Text: ", statusText);
+      console.log("Release ID: ", releaseId);
+      console.log("HTML URL: ", htmlUrl);
+      console.log("Upload URL: ", uploadUrl);
+
+      if (status !== 201) {
         core.setFailed(
-          `Failed to create the release: ${createReleaseResponse.status} ${createReleaseResponse.statusText}`
+          `Failed to create the release: ${status} ${statusText}`
         );
       } else {
         core.setOutput('id', releaseId);
@@ -29381,7 +29395,7 @@ async function release(tagName) {
         core.setOutput('upload_url', uploadUrl);
         core.setOutput('release_created', true);
       }
-      console.error('No release found, creating one');
+      console.error('No release found, created one');
     }
   } catch (error) {
     core.setFailed(error.message);
