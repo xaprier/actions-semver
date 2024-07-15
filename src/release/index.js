@@ -111,7 +111,6 @@ async function release(tagName) {
         core.setOutput('id', releaseId);
         core.setOutput('html_url', htmlUrl);
         core.setOutput('upload_url', uploadUrl);
-        core.setOutput('release_created', true);
       }
     } else {
       // no release, create one
@@ -200,7 +199,6 @@ async function release(tagName) {
         core.setOutput('id', releaseId);
         core.setOutput('html_url', htmlUrl);
         core.setOutput('upload_url', uploadUrl);
-        core.setOutput('release_created', true);
       }
       console.error('No release found, created one');
     }
