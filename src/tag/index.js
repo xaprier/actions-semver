@@ -6,8 +6,12 @@ const exec = util.promisify(child_process.exec);
 
 async function tag(lastCommitComment) {
   /** Get last Commit Comment */
-  const minor = lastCommitComment.toLocaleLowerCase().includes('minor');
-  const major = lastCommitComment.toLocaleLowerCase().includes('major');
+  // Bracketed-tag match, not a bare word/substring check - see the identical
+  // fix in src/main.js for why (a plain `.includes()`, or even a word-boundary
+  // `\bminor\b`, false-triggers the moment "minor"/"major" appears anywhere in
+  // a commit message's own ordinary prose, not as a deliberate signal).
+  const minor = /\[minor\]/i.test(lastCommitComment);
+  const major = /\[major\]/i.test(lastCommitComment);
 
   const validTag = /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/;
 
